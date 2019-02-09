@@ -1,0 +1,79 @@
+
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title> HALAMAN BERANDA </title>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css">
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <style media="screen">
+         #center {
+
+            margin: auto;
+            width: 60%;
+            border: 3px;
+            padding: 10px;
+         }
+      </style>
+
+   </head>
+
+   <body>
+
+       <div class="ui attached stackable menu">
+          <div class="ui fluid container">
+
+            <a class="item">
+              <i class="home icon"></i> Home
+            </a>
+
+            <a class="item">
+              <i class="grid layout icon"></i> Browse
+            </a>
+
+            <a class="item">
+              <i class="mail icon"></i> Message
+            </a>
+
+            <div class="ui simple dropdown item">More
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item"><i class="add icon"></i> Add Profile</a>
+                <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                <a class="item"><i class="setting icon"></i> Profile Settings</a>
+              </div>
+            </div>
+
+            <div class="right item">
+              <div class="ui input">
+                 <b><%= link_to "LOGOUT", :controller => 'user', :action => 'logout' %></b>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <br /><br /><br /><br /><br /> <br /> <br /> <!-- Just Laugh -->
+
+        <div class="ui placeholder segment" style="width: 500px;" id="center">
+          <div class="ui icon header">
+             <i class="smile outline icon"></i>
+               <h3> Haii ..
+               <%= @current_user.firstname %>
+               <%= @current_user.lastname %>
+               </h3>
+
+               <h3> Powered By : </h3>
+               <hr />
+               <img src="https://img.icons8.com/color/500/000000/ruby-programming-language.png">
+               <img src="https://img.icons8.com/color/500/000000/heroku.png">
+               <img src="https://img.icons8.com/color/500/000000/css3.png">
+               <img src="https://img.icons8.com/color/700/000000/postgreesql.png">
+               <img src="https://img.icons8.com/ios/500/000000/github-filled.png">
+               <hr />
+
+            </div>
+         </div>
+
+   </body>
+</html>

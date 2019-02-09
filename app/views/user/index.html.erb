@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Example Semantic </title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+    function show_signup() {
+      $("#login_div").fadeOut('fast', function() {
+       $("#register_div").fadeIn();
+      });
+    }
+
+    function show_login() {
+      $("#register_div").fadeOut('fast', function() {
+        $("#login_div").fadeIn();
+      });
+    }
+
+    function close_message() {
+      $("#error").fadeOut('fast');
+    }
+
+  </script>
+
+  <style type="text/css">
+
+    html. body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    #container {
+      min-height: 100%;
+      position: relative;
+    }
+
+    @media (min-height: 320px) {
+     .ui.footer.form-page { /* Increased specificity for SO snippet priority */
+        bottom: 0;
+        width: 100%;
+      }
+    }
+
+    .ui.footer.form-page { /* Increased specificity for SO snippet priority */
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    #register_div {
+
+      margin-top: 15px;
+      padding-bottom: 70px;
+    }
+
+    #error {
+      padding-top: 10px;
+      margin-top: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: auto;
+      width: 700px;
+    }
+
+    #login_div {
+      margin-top: 150px;
+
+    }
+
+    ::placeholder {
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="ui raised very padded text container segment autumn" id="login_div">
+    <h2 class="ui header" align="center">Login</h2>
+    <hr />
+    <%= form_tag({:action => 'cek_login'}, {:class => 'ui form'}) do %>
+
+      <div class="field ui left icon input">
+        <input type="text" placeholder="Email" name="email" size="90" >
+        <i class="user icon"></i>
+      </div>
+
+      <div class="field ui left icon input">
+        <input type="password" placeholder="Password" name="password" size="90">
+        <i class="user secret icon"></i>
+      </div>
+
+      <input type="submit" name="" value="Login" class="ui button" style="background-color: green; color: white; font-weight: bold;">
+
+    <% end %>
+    <hr />
+      <code><b><center> Copyright &copy 2019 | RP-guruh </center></b></code>
+      <b><center> <%= link_to "Mendaftar" , :action => "signup" %> </center></b>
+  </div>
+
+  <% if !flash[:error].blank? %>
+      <div class="ui error message" id="error">
+         <i class="close icon" onclick="close_message();"></i>
+            <div class="header"> Message Errors </div>
+         <ul class="list">
+             <b><%= flash[:error] %></b>
+         </ul>
+       </div>
+   <% end %>
+
+</body>
+</html>
+
+<!--
+
+ <div class="ui attached stackable menu">
+    <div class="ui fluid container">
+
+      <a class="item">
+        <i class="home icon"></i> Home
+      </a>
+
+      <a class="item">
+        <i class="grid layout icon"></i> Browse
+      </a>
+
+      <a class="item">
+        <i class="mail icon"></i> Message
+      </a>
+
+      <div class="ui simple dropdown item">More
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item"><i class="add icon"></i> Add Profile</a>
+          <a class="item"><i class="edit icon"></i> Edit Profile</a>
+          <a class="item"><i class="setting icon"></i> Profile Settings</a>
+        </div>
+      </div>
+
+      <div class="right item">
+        <div class="ui input">
+          <input type="text" name="" placeholder="Search...">
+          <div class="ui fluid large teal submit button">Login</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+<div class="ui raised very padded text container segment autumn" id="register_div">
+    <h2 class="ui header" align="center">Sign In</h2>
+
+     <%= form_for @member, as: :subject, :url => {:action => 'create'}, :html => {:class => 'ui form'} do |f| %>
+       <div class="field">
+        <label> First Name</label>
+         <%= f.text_field(:firstname, placeholder: "First Name") %>
+      </div>
+      <div class="field">
+        <label> Last Name</label>
+        <%= f.text_field(:lastname, placeholder: "Last Name") %>
+      </div>
+
+       <div class="field">
+        <label> Email</label>
+          <%= f.text_field(:email, placeholder: "Cukup Isikan Email Sesuai Format Yang Berlaku, Tidak Harus Email Anda Sebenarnya") %>
+      </div>
+       <div class="field">
+        <label> Password</label>
+        <%= f.password_field(:password, placeholder: "Password") %>
+      </div>
+
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="">
+          <label><b>Saya Setuju Dengan Syarat dan Ketentuan Yang Berlaku</b></label>
+        </div>
+      </div>
+
+       <div class="ui buttons">
+        <div class="ui button">Register</div>
+        <div class="or"></div>
+        <div class="ui positive button" onclick="show_login();">Click For Login</div>
+      </div>
+
+      <%= f.submit() %>
+
+    <% end %>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="ui fluid container" id="container">
+    <% if @member.errors.any? %>
+     <div class="ui error message" id="error">
+        <i class="close icon" onclick="close_message();"></i>
+          <div class="header"> Message Errors </div>
+        <ul class="list">
+          <% @member.errors.full_messages.each do |message| %>
+            <li> <%= message %> </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div class="ui raised very padded text container segment autumn" id="register_div">
+    <h2 class="ui header" align="center">Sign In</h2>
+
+     <%= form_for @member, as: :subject, :url => {:action => 'create'}, :html => {:class => 'ui form'} do |f| %>
+       <div class="field">
+        <label> First Name</label>
+         <%= f.text_field(:firstname, placeholder: "First Name") %>
+      </div>
+      <div class="field">
+        <label> Last Name</label>
+        <%= f.text_field(:lastname, placeholder: "Last Name") %>
+      </div>
+
+       <div class="field">
+        <label> Email</label>
+          <%= f.text_field(:email, placeholder: "Cukup Isikan Email Sesuai Format Yang Berlaku, Tidak Harus Email Anda Sebenarnya") %>
+      </div>
+       <div class="field">
+        <label> Password</label>
+        <%= f.password_field(:password, placeholder: "Password") %>
+      </div>
+
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="">
+          <label><b>Saya Setuju Dengan Syarat dan Ketentuan Yang Berlaku</b></label>
+        </div>
+      </div>
+
+
+      <%= f.submit() %>
+
+    <% end %>
+
+  </div>
+
+
+
+  -->
